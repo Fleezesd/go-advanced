@@ -32,7 +32,10 @@ func NewReader(r io.Reader) (io.Reader, error) {
 }
 */
 
-// MultiReaderExample 暂时测试 go 官方multi代码存在问题 后续看情况修改
+// MultiReaderExample
+// 此处有个大坑 切记: 当io.MultiReader从当前的Reader读取数据时，
+//
+//	如果这个Reader能够提供数据（即未到达EOF），io.MultiReader将返回这些数据给调用者，而不会立即尝试从下一个Reader读取数据。
 func MultiReaderExample() {
 	// 创建三个字符串读取器，模拟多个数据源
 	reader1 := strings.NewReader("Hello")
@@ -44,12 +47,18 @@ func MultiReaderExample() {
 
 	// 从multiReader中读取数据到一个足够大的缓冲区
 	// 注意：在实际应用中，应根据数据大小适当选择缓冲区的大小
-	buf := make([]byte, 1024)
-	n, err := multiReader.Read(buf)
-	if err != nil && err != io.EOF {
-		log.Fatalf("Failed to read: %v", err)
-	}
+	for {
+		buf := make([]byte, 1024)
+		n, err := multiReader.Read(buf)
+		if err != nil && err != io.EOF {
+			log.Fatalf("Failed to read: %v", err)
+		}
 
-	// 打印从multiReader读取到的数据
-	fmt.Printf("Read from multiReader: %s", string(buf[:n]))
+		if err == io.EOF {
+			break // 所有Reader都已经读取完毕
+		}
+
+		// 打印从multiReader读取到的数据
+		fmt.Printf("Read from multiReader: %s", string(buf[:n]))
+	}
 }

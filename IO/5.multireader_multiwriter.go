@@ -5,6 +5,7 @@ import (
 	"os"
 )
 
+// MultiReaderAndWriter 高效的数据复制和分发模式  譬如日志记录
 type MultiReaderAndWriter interface {
 	Copy(dst Writer, src Reader) (written int64, err error)
 	MultiReader(readers ...Reader) Reader
