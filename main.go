@@ -1,12 +1,18 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/fleezesd/go-advanced/Concurrency"
+	"github.com/fleezesd/go-advanced/IO"
 )
 
 func main() {
-	info, _ := Concurrency.WeightBoundedCities("us", "zh")
-	fmt.Println(info[0].TempC, info[1].TempC)
+	// Concurrency
+
+	/*
+		info, _ := Concurrency.WeightBoundedCities("us", "zh")
+		fmt.Println(info[0].TempC, info[1].TempC)
+	*/
+
+	// IO
+	// IO.MultiWrite()
+	IO.MultiReaderExample()
 }

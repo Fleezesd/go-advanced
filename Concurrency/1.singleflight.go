@@ -6,6 +6,8 @@ import (
 	"golang.org/x/sync/singleflight"
 )
 
+// reference: https://encore.dev/blog/advanced-go-concurrency
+
 type Info struct {
 	TempC, TempF int    // temperature in Celsius and Farenheit
 	Conditions   string // "sunny", "snowing", etc
