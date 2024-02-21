@@ -8,6 +8,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// reference: https://darjun.github.io/2021/08/11/godailylib/testify/
+
 func TestEqual(t *testing.T) {
 	var (
 		a = 100
@@ -20,7 +22,7 @@ func TestEqual(t *testing.T) {
 func TestContains(t *testing.T) {
 	var (
 		a = []int{1, 2, 3}
-		b = 1
+		b = 4
 	)
 	// test 原串 子串 msg
 	assert.Contains(t, a, b, "测试Contains")
@@ -49,6 +51,7 @@ func TestDirExists(t *testing.T) {
 		ErrorAs断言err表示的 error 链中至少有一个和target匹配。这个函数是对标准库中errors.As的包装
 	7. ErrorIs(t TestingT, err, target error, msgAndArgs ...interface{}) bool
 		ErrorIs断言err的 error 为对应target。
+
 	逆断言带上Not即可
 */
 
